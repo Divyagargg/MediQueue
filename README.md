@@ -25,5 +25,3 @@ Register 3–5 patients with different priorities.
 - Click "Call Next Patient".
 The Critical patient is called first because the priority queue is checked before the normal FIFO queue.
 
-## Viva one-liner
-"Normal patients use a FIFO queue, while emergency cases use a min-heap based priority queue so higher-severity patients are processed first."
