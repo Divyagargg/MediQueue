@@ -1,0 +1,6 @@
+MEDIQUEUE — SUBMISSION
+FASTEST: Open standalone/index.html by double-clicking it. It runs directly in Chrome/Edge without installing anything.
+Demo: register one Normal and one Critical patient, then click Call Next Patient. Critical is selected first.
+FULL VERSION: app.py + templates + static. Run `pip install -r requirements.txt` then `python app.py`.
+Title: MediQueue — Smart Hospital Patient Management System
+DSA: Priority Queue, FIFO Queue, Searching, Sorting.

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediQueue — Smart Hospital Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">✚</div><div><b>MediQueue</b><span>DSA Hospital System</span></div></div>
+    <nav>
+      <a class="active" href="#dashboard">⌂ <span>Dashboard</span></a>
+      <a href="#patients">♙ <span>Patients</span></a>
+      <a href="#register">＋ <span>Register Patient</span></a>
+      <a href="#about">⌁ <span>DSA Concepts</span></a>
+    </nav>
+    <div class="side-card">
+      <div class="pulse"></div>
+      <b>System Online</b>
+      <small>Queue engine is active</small>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">HOSPITAL OPERATIONS</p>
+        <h1>Patient Management Dashboard</h1>
+        <p class="sub">Real-time patient flow powered by Data Structures & Algorithms.</p>
+      </div>
+      <button class="primary" onclick="scrollToRegister()">＋ Register Patient</button>
+    </header>
+
+    <section id="dashboard" class="stats-grid">
+      <div class="stat"><div class="stat-icon blue">♙</div><div><span>Total Patients</span><strong id="total">0</strong></div></div>
+      <div class="stat"><div class="stat-icon orange">◷</div><div><span>Waiting</span><strong id="waiting">0</strong></div></div>
+      <div class="stat"><div class="stat-icon red">♥</div><div><span>Urgent Cases</span><strong id="emergency">0</strong></div></div>
+      <div class="stat"><div class="stat-icon green">✓</div><div><span>Discharged</span><strong id="discharged">0</strong></div></div>
+    </section>
+
+    <section class="content-grid">
+      <div class="card register" id="register">
+        <div class="card-head"><div><h2>Register Patient</h2><p>Add a patient to the hospital queue.</p></div><span class="tag">QUEUE</span></div>
+        <form id="patientForm">
+          <div class="form-grid">
+            <label>Patient Name<input id="name" required placeholder="e.g. Rahul Sharma"></label>
+            <label>Age<input id="age" type="number" min="1" max="120" required placeholder="Age"></label>
+            <label>Gender<select id="gender"><option>Male</option><option>Female</option><option>Other</option></select></label>
+            <label>Department<select id="department"><option>General</option><option>Cardiology</option><option>Neurology</option><option>Orthopedics</option><option>Pediatrics</option><option>Emergency</option></select></label>
+            <label>Priority<select id="priority"><option>Normal</option><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></label>
+            <label class="wide">Symptoms / Reason<input id="symptoms" required placeholder="Describe symptoms or reason for visit"></label>
+          </div>
+          <button class="primary full" type="submit">Add Patient to Queue →</button>
+          <div id="formMsg" class="form-msg"></div>
+        </form>
+      </div>
+
+      <div class="card next-card">
+        <div class="card-head"><div><h2>Doctor Queue</h2><p>Who should be seen next?</p></div><span class="tag purple">DSA</span></div>
+        <div class="queue-visual">
+          <div class="queue-icon">♥</div>
+          <h3>Priority First</h3>
+          <p>Critical and high-priority cases are processed before the normal FIFO queue.</p>
+        </div>
+        <button class="call-btn" onclick="callNext()">Call Next Patient <span>→</span></button>
+        <div id="nextResult" class="next-result hidden"></div>
+      </div>
+    </section>
+
+    <section class="card table-card" id="patients">
+      <div class="card-head table-head">
+        <div><h2>Patient Records</h2><p>Search and manage registered patients.</p></div>
+        <div class="tools"><input id="search" oninput="searchPatients()" placeholder="⌕  Search patient..."><select id="sort" onchange="renderPatients()"><option value="arrival">Newest</option><option value="priority">Priority</option><option value="age">Age</option><option value="name">Name</option></select></div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>ID</th><th>PATIENT</th><th>DEPARTMENT</th><th>PRIORITY</th><th>STATUS</th><th>ARRIVAL</th><th>ACTION</th></tr></thead>
+        <tbody id="patientRows"></tbody></table>
+        <div id="empty" class="empty">No patient records yet. Register a patient to get started.</div>
+      </div>
+    </section>
+
+    <section class="card dsa-card" id="about">
+      <div class="card-head"><div><h2>DSA Concepts Used</h2><p>This makes the project a real DSA application, not just a CRUD website.</p></div></div>
+      <div class="dsa-grid">
+        <div><b>Priority Queue</b><span>Emergency patients are served according to severity.</span><code>heapq</code></div>
+        <div><b>Queue (FIFO)</b><span>Normal patients are served in arrival order.</span><code>deque</code></div>
+        <div><b>Searching</b><span>Search by ID, name, department or symptoms.</span><code>O(n)</code></div>
+        <div><b>Sorting</b><span>Records can be arranged by name, age or priority.</span><code>key sort</code></div>
+      </div>
+    </section>
+
+    <footer>© 2026 MediQueue · DSA Mini Project · Python Flask + HTML + CSS + JavaScript</footer>
+  </main>
+</div>
+<div id="toast"></div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
